@@ -116,6 +116,7 @@
         #man-img{
             width: 100%;
         }
+        /* 모바일 */
     </style>
 </head>
 <body>
@@ -226,7 +227,6 @@
             if (prediction[0].probability.toFixed(2) >= 0.90 || prediction[1].probability.toFixed(2) >= 0.90) {
                 if (status == "normal"){
                     count = 0;
-                    point++;
                 }
                 count ++;
                 document.getElementById("main-img").style.display = "none"
@@ -234,10 +234,13 @@
                     document.getElementById("main-text").innerHTML = `손을 들고 있습니다 (올라간 횟수: ${point})`
                     
                 }
+                if(count == 30){
+                    point++;
+                }
                 status = "handsUp";
             }
             else if (prediction[2].probability.toFixed(2) >= 0.90 || prediction[3].probability.toFixed(2) >= 0.90) {
-                document.getElementById("main-text").innerHTML = "손 내리고 있습니다"
+                document.getElementById("main-text").innerHTML =    `손이 내려가 있습니다 (올라간 횟수: ${point})`
                 document.getElementById("main-img").style.display = "block"
                 status = "normal";
             }
